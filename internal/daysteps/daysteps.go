@@ -40,4 +40,22 @@ func parsePackage(data string) (int, time.Duration, error) {
 // функция. Если пакет невалидный, storage возвращается без изменений.
 func DayActionInfo(data string, weight, height float64) string {
 	// ваш код ниже
+	steps, _, err := parsePackage(data)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+
+	if steps == 0 {
+		return ""
+	}
+
+	distanse_km := (StepLength * float64(steps)) / 1000
+	calories := WalkingSpentCalories(weight, height)
+
+	str1 := fmt.Sprintf("Количество шагов: %d.\n", steps)
+	str2 := fmt.Sprintf("Дистанция составила %.2f км.\n", distanse_km)
+	str3 := fmt.Sprintf("Вы сожгли %.2f ккал.", calories)
+
+	return str1 + str2 + str3
 }
