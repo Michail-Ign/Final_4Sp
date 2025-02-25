@@ -1,6 +1,10 @@
 package daysteps
 
 import (
+	"errors"
+	"fmt"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -10,6 +14,22 @@ var (
 
 func parsePackage(data string) (int, time.Duration, error) {
 	// ваш код ниже
+	slice := strings.Split(data, ",")
+	if len(slice) != 2 {
+		return 0, 0, errors.New("Ошибка разделения строки")
+	}
+
+	step, err := strconv.Atoi(slice[0])
+	if err != nil {
+		return 0, 0, fmt.Errorf("[Parse int] %w", err)
+	}
+
+	duration, err := time.ParseDuration(slice[1])
+	if err != nil {
+		return 0, 0, fmt.Errorf("[Parse Duration] %w", err)
+	}
+
+	return step, duration, nil
 }
 
 // DayActionInfo обрабатывает входящий пакет, который передаётся в
