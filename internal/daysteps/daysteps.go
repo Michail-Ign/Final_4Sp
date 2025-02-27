@@ -18,7 +18,7 @@ func parsePackage(data string) (int, time.Duration, error) {
 	// ваш код ниже
 	slice := strings.Split(data, ",")
 	if len(slice) != 2 {
-		return 0, 0, errors.New("Ошибка разделения строки")
+		return 0, 0, errors.New("Ошибка разделения строки.")
 	}
 
 	step, err := strconv.Atoi(slice[0])
