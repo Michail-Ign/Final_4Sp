@@ -6,6 +6,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/Yandex-Practicum/go1fl-4-sprint-final/internal/spentcalories"
 )
 
 var (
@@ -40,7 +42,7 @@ func parsePackage(data string) (int, time.Duration, error) {
 // функция. Если пакет невалидный, storage возвращается без изменений.
 func DayActionInfo(data string, weight, height float64) string {
 	// ваш код ниже
-	steps, _, err := parsePackage(data)
+	steps, duration, err := parsePackage(data)
 	if err != nil {
 		fmt.Println(err)
 		return ""
@@ -51,7 +53,7 @@ func DayActionInfo(data string, weight, height float64) string {
 	}
 
 	distanse_km := (StepLength * float64(steps)) / 1000
-	calories := WalkingSpentCalories(weight, height)
+	calories := spentcalories.WalkingSpentCalories(steps, weight, height, duration)
 
 	str1 := fmt.Sprintf("Количество шагов: %d.\n", steps)
 	str2 := fmt.Sprintf("Дистанция составила %.2f км.\n", distanse_km)
